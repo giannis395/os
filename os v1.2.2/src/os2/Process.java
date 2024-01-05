@@ -10,7 +10,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Process implements Comparable<Process>{
+public class Process {
     
     public static Scanner scanner = new Scanner(System.in);
     public static Random rand = new Random();
@@ -19,11 +19,12 @@ public class Process implements Comparable<Process>{
     private int state = 0; // ready(0) running(1) blocked(2)
     private int priority; // 1 to 7 (1 is highest)
     private int arrivalTime;
-    private int responseTime;
+    private int responseTime =-1;
     private int io;
     private int burst_time;
     private int timeStarted;
     private int remain;
+    private int turn;
     
     public Process(int id, int priority, int arrivalTime, int io, int burst_time) {
         this.id = id;
@@ -31,19 +32,7 @@ public class Process implements Comparable<Process>{
         this.io = io;
         this.burst_time = burst_time;
         this.arrivalTime = arrivalTime;
-    }
-    
-    @Override
-    public int compareTo(Process other){
-        if (this.priority == other.priority) {
-            if (this.timeStarted == other.timeStarted) {
-                return this.id - other.id;
-            } else {
-                return other.timeStarted - this.timeStarted;
-            }
-        } else {
-            return this.priority - other.priority;
-        }
+        remain = burst_time;
     }
     
     @Override 
@@ -57,10 +46,12 @@ public class Process implements Comparable<Process>{
     public int getPriority(){return priority;}
     public int getRemain() {return remain;}
     public int getIo(){return io;}
+    public int getTurn() { return turn;}
     public int getBurst_time(){return burst_time;}
     public int getTimeStarted() {return timeStarted;}
 
     public void setId(int id){this.id = id;}
+    public void setTurn(int turn) {this.turn=turn;}
     public void setResponseTime(int rt) {responseTime=rt;}
     public void setRemain(int remain) {this.remain=remain;}
     public void setState(int state){this.state = state;}
@@ -70,10 +61,29 @@ public class Process implements Comparable<Process>{
     public void setIo(int io){this.io = io;}
     public void setBurst_time(int burst_time){this.burst_time = burst_time;}
     
-    public void execute(int time){
-        
+    public void execute(int time, Queue<Process>[] queues){
+       if (responseTime == -1) {
+            responseTime = Clock.getTime();
+        }
+
+        int executionTime = Math.min(time, remain);
+        System.out.println("Executing " + id + " with priority " +priority+ " for " + executionTime + " units.");
+
+        remain -= executionTime;
+
+        if (remain == 0) {
+            turn = Clock.getTime() - arrivalTime;
+        } else if (io > 0) {
+            // Simulate I/O operation
+            System.out.println(id + " performing I/O for " + io + " units.");
+            queues[7].add(this);
+            Clock.tick(io);
+            System.out.println(id + " I/O completed.");
+            
+            queues[priority -1].add(this);
+        }
     }
-    
+  
     static Process fillProcess(int i,boolean manual){ // true(manual), false(automatic)
         
         Process task;

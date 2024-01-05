@@ -23,10 +23,26 @@ public class OS2 {
     public static void main(String[] args) {
         int timeQuantum = 10;
         System.out.println("Please write the number of the processes: ");
-        int n = scanner.nextInt();
-        
+        int n = scanner.nextInt(), i;
+         
         
         Queue<Process>[] queues = Process.fillQueue(n, false); 
+        // queues[7]: blocked
+        Process current = new Process(1,1,1,1,1);
+        do{
+            i = find(queues);
+            if (i == -1){
+                System.out.println("There are not processes to execute");
+                break;
+            }
+            else {
+                current = queues[i].poll();
+                current.execute(timeQuantum, queues); }
+        }while(true);
+        System.out.println("----------------------");
+        System.out.println("Average turnaround time");
+        double att;
+        int turn;
         if(queues[0] != null){
             Process.printQueue(queues[0]);
             System.out.println();
@@ -54,5 +70,18 @@ public class OS2 {
         if(queues[6] != null){
             Process.printQueue(queues[6]);
         }
+        
     }
+     public static int find(Queue<Process>[] queues){
+        int thesi = -1;
+        for (int i = 0; i < 7; i++) {
+            if (queues[i] != null && !queues[i].isEmpty()) {
+                thesi = i;
+                break;
+            }
+        }
+        return thesi;
+     }
+             
 }
+
