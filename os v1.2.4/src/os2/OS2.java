@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class OS2 {
 
     //public static Scanner scanner = new Scanner(System.in);
-    public static Scanner scanner = new Scanner("true 2 false");
+    public static Scanner scanner = new Scanner("true 10 false");
     public static Random rand = new Random();
     public static int clock=0;
-    public static int reset;
+    public static int reset = 0;
     
     public static Queue<Process>[] queues;
     public static Process[] oBlockedList = new Process[0];
@@ -31,8 +31,8 @@ public class OS2 {
 
             queues = QueueClass.fillQueue(n, typeTasksCreation);
             QueueClass.printQueueArray(queues);
+            
             Process task;
-
             for(int i=0; i<7; i++){
                 while(!(queues[i].isEmpty())){
                     task = queues[i].poll();
@@ -41,6 +41,7 @@ public class OS2 {
                         randomIO();
                     }else{
                         queues[i].add(task);
+                        clock++;
                     }
                     if(reset == 1){
                         reset = 0;
@@ -49,6 +50,10 @@ public class OS2 {
                     }
                 }
             }
+            System.out.println(clock);
+            System.out.println("Avg Response time " + Process.avgResponseTime(oCompleteProcess));
+            System.out.println("Avg turnaround time " + Process.avgTurnaroundTime(oCompleteProcess));
+            Process.printProcessArray(oCompleteProcess);
         }
         else{
             
@@ -61,7 +66,7 @@ public class OS2 {
         int timeSlice = task.getRemain_TimeSlice();
         
         if(task.getResponseTime() == -1 && task.getBurst_time() > 0){task.setResponseTime(clock);}
-        for(int i=0; i<timeSlice; i++){
+        for(int i=0; i<=timeSlice; i++){
             if(task.getBurst_time() > 0){
                 // if the process is not complete
                 
@@ -81,13 +86,14 @@ public class OS2 {
             }else{
                 // if the process is complete
                 task.setTimeFinished(clock);
-                oCompleteProcess = Process.addToArray(oBlockedList, task);
+                task.setState(3);
+                oCompleteProcess = Process.addToArray(oCompleteProcess, task);
                 clock++;
                 return;
             }
         }  
         // timeout of process
-        task.setRemain_TimeSlice((task.getBurst_time()<10) ? task.getBurst_time() : 10); // reset remain time of process
+        task.setRemain_TimeSlice((task.getBurst_time()<3) ? task.getBurst_time() : 3); // reset remain time of process
         task.setState(0);
         queues[task.getPriority()-1].add(task);
     }

@@ -2,6 +2,7 @@
 package os2;
 
 
+import java.util.Formatter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Process {
     public static Random rand = new Random();
     
     private int id;
-    private int state = 0; // ready(0) running(1) blocked(2)
+    private int state = 0; // ready(0) running(1) blocked(2) complete(4)
     private int priority; // 1 to 7 (1 is highest)
     private int arrivalTime;
     private int responseTime = -1;
@@ -28,7 +29,7 @@ public class Process {
         this.burst_time = burst_time;
         this.arrivalTime = arrivalTime;
         this.io = io;
-        this.remain_TimeSlice = (burst_time < 10) ? burst_time : 10;
+        this.remain_TimeSlice = (burst_time < 3) ? burst_time : 3;
     }
     
     // getters and setters
@@ -60,7 +61,7 @@ public class Process {
     static double avgResponseTime(Process oTasksList[]){
         int responseTimeSum = 0, size = oTasksList.length;
         for(int i=0; i<size; i++){
-            responseTimeSum += oTasksList[i].responseTime;
+            responseTimeSum += oTasksList[i].responseTime - oTasksList[i].arrivalTime;
         }
         double avg = responseTimeSum/size;
         return avg;
@@ -76,6 +77,16 @@ public class Process {
         return avg;
     }
 
+    // print Process obj list
+    static void printProcessArray(Process oList[]){
+        Formatter fmt = new Formatter();
+        fmt.format("%4s %3s %7s %9s %11s %12s %11s %6s %10s %10s %12s %7s\n", "#|", "ID |", "State |", "Priority |", "ArivalTime |", "ResponseTime |", "Burst_Time |", "IO |", "ioStartTime |", "ioWaitTime |", "TimeFinished |", "Remain_TimeSlice |"); 
+        
+        for (int i=0; i<oList.length; i++){
+            fmt.format("%3s %3s %5s %8s %12s %13s %13s %10s %8s %12s %14s %16s\n", i+1, oList[i].getId(), oList[i].getState(), oList[i].getPriority(), oList[i].getArrivalTime(), oList[i].getResponseTime(), oList[i].getBurst_time(), oList[i].getIO(), oList[i].getIoStartTime(), oList[i].getIoWaitTime(), oList[i].getTimeFinished(), oList[i].getRemain_TimeSlice());
+        }
+        System.out.println(fmt);
+    }
     
     // add an element to arrayList
     static Process[] addToArray(Process oldArray[], Process newElement){

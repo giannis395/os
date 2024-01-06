@@ -17,6 +17,7 @@ public class QueueClass {
     static Queue<Process>[] fillQueue(int n, boolean manual){
         
         Queue<Process>[] queues = new LinkedList[7]; // array of queues
+        for(int i=0; i<7; i++){queues[i] = new LinkedList<>();}
         
         for(int i=0; i<n; i++){     
             //fill a process obj
@@ -40,51 +41,30 @@ public class QueueClass {
 
             }else{
                 // automatic fill
-                oTask = new Process(i, rand.nextInt(7)+1, rand.nextInt(10)+OS2.clock, rand.nextInt(100)+1, rand.nextBoolean());
+                oTask = new Process(i, rand.nextInt(7)+1, rand.nextInt(3)+OS2.clock, rand.nextInt(10)+1, false);//rand.nextBoolean());
             }
             
             //sorts the object into the corresponding queue based on priority
             switch(oTask.getPriority()){
                 case 1:
-                    if(queues[0] == null){
-                        queues[0] = new LinkedList<>();
-                    }
                     queues[0].add(oTask);
                     break;
                 case 2:
-                    if(queues[1] == null){
-                        queues[1] = new LinkedList<>();
-                    }
                     queues[1].add(oTask);
                     break;
                 case 3:
-                    if(queues[2] == null){
-                        queues[2] = new LinkedList<>();
-                    }
                     queues[2].add(oTask);
                     break;
                 case 4:
-                    if(queues[3] == null){
-                        queues[3] = new LinkedList<>();
-                    }
                     queues[3].add(oTask);
                     break;
                 case 5:
-                    if(queues[4] == null){
-                        queues[4] = new LinkedList<>();
-                    }
                     queues[4].add(oTask);
                     break;
                 case 6:
-                    if(queues[5] == null){
-                        queues[5] = new LinkedList<>();
-                    }
                     queues[5].add(oTask);
                     break;
                 case 7:
-                    if(queues[6] == null){
-                        queues[6] = new LinkedList<>();
-                    }
                     queues[6].add(oTask);
                     break;
             }
@@ -92,6 +72,7 @@ public class QueueClass {
         return queues;
     }
     
+    // print a queue in list form
     static void printQueue(Queue<Process> queue){
         Formatter fmt = new Formatter();
         fmt.format("%4s %3s %7s %9s %11s %12s %11s %6s %10s %10s %12s %7s\n", "#|", "ID |", "State |", "Priority |", "ArivalTime |", "ResponseTime |", "Burst_Time |", "IO |", "ioStartTime |", "ioWaitTime |", "TimeFinished |", "Remain_TimeSlice |"); 
@@ -103,6 +84,7 @@ public class QueueClass {
         System.out.println(fmt);
     }
     
+    // print a queue array in list form
     static void printQueueArray(Queue<Process>[] queues){
         for(int i=0; i<queues.length; i++){
             if(queues[i] != null){
@@ -112,6 +94,7 @@ public class QueueClass {
         }
     }
     
+    // converts a queue to array
     static Process[] queueToArray(Queue<Process> queue){
         
         // create array and copy queue
