@@ -7,7 +7,7 @@ English
 
 Work for the 5th standard semester course "Operating Systems Design"
 
-Students/Participants: Tsoplakis Ioannis
+Students/Participants: Tsoplakis Ioannis,
                        Sfakianakis Emmanouil
 
 Our work was implemented with the Java programming language
@@ -26,8 +26,8 @@ Finally, it shows the average response and average return, and then shows the pr
 
 Εργασία για το μάθημα του 5ου τυπικού εξαμήνου «Σχεδίαση Λειτουργικών Συστημάτων»
 
-Φοιτητές/Συμμετέχοντες: Τσοπλάκης Ιωάννης, ΑΜ: 2020180
-                        Σφακιανάκης Εμμανουήλ, ΑΜ: 2021163
+Φοιτητές/Συμμετέχοντες: Τσοπλάκης Ιωάννης,
+                        Σφακιανάκης Εμμανουήλ
 
 H εργασία μας υλοποιήθηκε με τη γλώσσα προγραμματισμού Java
 H εφαρμογή μας ξεκινάει με την ερώτηση προς το χρήστη αν θέλει η δημιουργία των διεργασιών να γίνει αυτόματα ή χειροκήνητα
