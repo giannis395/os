@@ -4,6 +4,7 @@
 
 -------------------------------
 English
+
 Work for the 5th standard semester course "Operating Systems Design"
 
 Students/Participants: Tsoplakis Ioannis
@@ -19,6 +20,7 @@ Finally, it shows the average response and average return, and then shows the pr
 
 --------------------------------
 Ελληνικά
+
 Εργασία για το μάθημα του 5ου τυπικού εξαμήνου «Σχεδίαση Λειτουργικών Συστημάτων»
 
 Φοιτητές/Συμμετέχοντες: Τσοπλάκης Ιωάννης, ΑΜ: 2020180
