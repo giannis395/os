@@ -12,7 +12,10 @@ Students/Participants: Tsoplakis Ioannis
 
 Our work was implemented with the Java programming language
 Our application starts by asking the user if he wants the creation of the processes to be done automatically or manually
-Ιf select the option for manual creation, it begins by asking how many processes the user wants to create
+ If you want the creation to be done automatically, you must write "false"
+ If you want the creation to be done manually, you must write "true"
+ "Please give the type of tasks creation (automatic(false), manual(true)):"
+Ιf select the option for manual creation, it begins by asking how many processes the user wants to create "
 Then it asks about each process: arrival time, burst time, but also its priority.
 On the other hand, automatic creation simply creates processes automatically. Each time the creation process ends, it asks the user if they want to create another process
 It then displays the processes and their components by priority in the order they were placed
