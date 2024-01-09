@@ -1,53 +1,30 @@
 
 package os2;
 
-//************************* test queue ***************************************
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.LinkedList;
-//****************************************************************************
 
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class OS2 {
 
-    public static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner("false 0 0 0 0 0 0 0 0 0 0 0 1");
     public static Random rand = new Random();
     public static int clock=-1;
     
-    private static Queue<Process>[] readyQueues = new LinkedList[7]; // array of queues
+    private static final Queue<Process>[] readyQueues = new LinkedList[7]; // array of queues
     private static Queue<Process> arrivalQueue;
     private static Process[] oBlockedList = new Process[0];
     private static Process[] oCompleteProcess = new Process[0];
-    private static int reset=0, k=0, nextProcess = -1;
+    private static int nextProcess = -1;
 
-    //public static void main(String[] args){
+    public static void main(String[] args){
     
-    // create Queues for readyQueues array
-    //for(int i=0; i<7; i++){readyQueues[i] = new LinkedList<>();}
-    
-
-    //************************* test queue ***************************************
-    public static void main(String[] args) throws
-            FileNotFoundException {
-        
-        Process[] oTasksArray = new Process[0];
-        int j=0;
-        File text = new File("D:\\Giannis\\8. Χρηστης\\Desktop\\os v1.2.5\\src\\os2\\fill.txt");
-        Scanner scnr = new Scanner(text);
+        // create Queues for readyQueues array
         for(int i=0; i<7; i++){readyQueues[i] = new LinkedList<>();}
-        while(scnr.hasNextLine()){
-            Scanner line = new Scanner(scnr.nextLine());
-            Process oTask = new Process(j, line.nextInt(), line.nextInt(), line.nextInt(), false);
-            oTasksArray = Process.addToArray(oTasksArray, oTask);
-            arrivalQueue = QueueClass.fillArivalQueue(oTasksArray);
-            j++;
-        }
-        //*************************************************************************
 
-        /*System.out.println("Please give the type of tasks creation (automatic(false), manual(true): ");
+        System.out.println("Please give the type of tasks creation (automatic(false), manual(true): ");
         boolean typeTasksCreation = scanner.nextBoolean(); 
         
         if(typeTasksCreation){
@@ -62,17 +39,13 @@ public class OS2 {
             // Automatic
             arrivalQueue = QueueClass.fillArivalQueue();
             QueueClass.printQueue(arrivalQueue);
-        }*/
+        }
         
-        System.out.println("arrival queue");
-        QueueClass.printQueue(arrivalQueue);
-        
+        //************************************************
         clock();
-        System.out.println(nextProcess);
-        System.out.println(readyQueues[nextProcess].peek());
 
         Process currentProcess;
-        while(nextProcess != -1 || !(QueueClass.readyQueueIsEmpty(readyQueues)) || (oBlockedList.length != 0) || arrivalQueue.size() != 0){
+        while(nextProcess != -1 || !QueueClass.readyQueueIsEmpty(readyQueues) || oBlockedList.length != 0 || !arrivalQueue.isEmpty()){
             if(nextProcess != -1){
                 currentProcess = readyQueues[nextProcess].poll();
                 execute(currentProcess);
@@ -160,7 +133,5 @@ public class OS2 {
         }
         System.out.println("ready Queues is currently empty");
         nextProcess = -1;
-    }
-    
-    
+    }    
 }

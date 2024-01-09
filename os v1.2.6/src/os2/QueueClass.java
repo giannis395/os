@@ -71,7 +71,7 @@ public class QueueClass {
         
         do{     
             Process oTask;
-            oTask = new Process(i, rand.nextInt(7)+1, rand.nextInt(3)+OS2.clock, rand.nextInt(10)+1, false);//rand.nextBoolean());
+            oTask = new Process(i, rand.nextInt(7)+1, rand.nextInt(10), rand.nextInt(10)+1, false);//rand.nextBoolean());
 
             System.out.println("Do you want to continue create processes? Press 0 to continueue");
             user = scanner.nextInt();
@@ -159,73 +159,3 @@ public class QueueClass {
         return true;
     }
 }
-    
-    /*
-    // fills a array of queues (sorted by priority) with objects based on their priority
-    static Queue<Process>[] fillQueue(boolean manual){
-        return fillQueue(1, manual);
-    }
-    static Queue<Process>[] fillQueue(int n, boolean manual){
-        
-        Queue<Process>[] queues = new LinkedList[7]; // array of queues
-        for(int i=0; i<7; i++){queues[i] = new LinkedList<>();}
-        
-        int i=0, user=0;
-        do{     
-            //fill a process obj
-            Process oTask;
-            if(manual){
-                //manual fill
-                int arrivalTime, burstTime, priority;
-                do {
-                    System.out.println("Please the arrival time of " + i + " process: ");
-                    arrivalTime = scanner.nextInt();
-                } while (arrivalTime < 0 );
-                do {
-                    System.out.println("Please the burst time, which must be above the zero, of " + i + " process: ");
-                    burstTime = scanner.nextInt(); 
-                } while (burstTime <= 0);
-                do {
-                    System.out.println("Please the priority, which must be between 1 and 7, of " + i + " process: ");
-                    priority = scanner.nextInt(); 
-                } while (priority < 0 || priority >7);
-                oTask = new Process(i, priority, arrivalTime, burstTime, rand.nextBoolean());
-                if(i>=n-1){user=1;}
-
-            }else{
-                // automatic fill
-                oTask = new Process(i, rand.nextInt(7)+1, rand.nextInt(3)+OS2.clock, rand.nextInt(10)+1, false);//rand.nextBoolean());
-                
-                System.out.println("Do you want to continue create processes? Press 0 to continueue");
-                user = scanner.nextInt();
-            }
-            
-            //sorts the object into the corresponding queue based on priority
-            switch(oTask.getPriority()){
-                case 1:
-                    queues[0].add(oTask);
-                    break;
-                case 2:
-                    queues[1].add(oTask);
-                    break;
-                case 3:
-                    queues[2].add(oTask);
-                    break;
-                case 4:
-                    queues[3].add(oTask);
-                    break;
-                case 5:
-                    queues[4].add(oTask);
-                    break;
-                case 6:
-                    queues[5].add(oTask);
-                    break;
-                case 7:
-                    queues[6].add(oTask);
-                    break;
-            }
-            i++;
-        }while (user == 0);
-        return queues;
-    }
-    */
