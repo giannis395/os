@@ -10,16 +10,7 @@ Work for the 5th standard semester course "Operating Systems Design"
 Students/Participants: Tsoplakis Ioannis,
                        Sfakianakis Emmanouil
 
-Our work was implemented with the Java programming language
-Our application starts by asking the user if he wants the creation of the processes to be done automatically or manually
- If you want the creation to be done automatically, you must write "false"
- If you want the creation to be done manually, you must write "true"
- "Please give the type of tasks creation (automatic(false), manual(true)):"
-Ιf select the option for manual creation, it begins by asking how many processes the user wants to create "
-Then it asks about each process: arrival time, burst time, but also its priority.
-On the other hand, automatic creation simply creates processes automatically. Each time the creation process ends, it asks the user if they want to create another process
-It then displays the processes and their components by priority in the order they were placed
-Finally, it shows the average response and average return, and then shows the processes and their items in the order they were executed
+Our project was implemented using the Java programming language. The program starts by inquiring if the user prefers automatic or manual process creation. Then inquires if detailed results are desired. Manual creation starts with asking the user how many processes they want to create. Then asks for each process: arrival time, burst time, and priority. On the other hand, automatic creation simply generates processes automatically. After each process creation finishes, it asks the user if they want to create another process. If the user has requested detailed results, it displays the details of all processes before and after their execution, along with comparative tables (average response time and average turnaround time). Otherwise, it only shows the comparative tables.
 
 --------------------------------
 Ελληνικά
