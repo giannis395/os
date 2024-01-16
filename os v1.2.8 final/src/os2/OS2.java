@@ -1,5 +1,5 @@
 /*
-    *Students: Tsoplakis Ioannis 2020180, Emmanuel Sfakianakis 2021163
+    *Students/Participant: Tsoplakis Ioannis 2020180, Emmanuel Sfakianakis 2021163
     *Course: Design of Operating Systems
     *Code Version: 1.2.8 (final)
 */
